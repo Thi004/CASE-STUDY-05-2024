@@ -61,7 +61,8 @@ function showRemove(index) {
         showHome();
     }
 }
-function showEdit(index){
+
+function showEdit(index) {
     let list = myStore.listProduct;
     let oldProduct = list[index];
     document.getElementById('main').innerHTML = `
@@ -70,24 +71,70 @@ function showEdit(index){
     <input value="${oldProduct.price}" type="text" placeholder="Giá" id="price">
     <input value="${oldProduct.quantity}" type="text" placeholder="Số lượng" id="quantity">
     <input value="${oldProduct.image}" type="text" placeholder="Hình sản phẩm" id="image">
-    <button onclick="save(${index})">Lưu thay đổi</button> ` ;
+    <button onclick="save(${index})">Lưu thay đổi</button> `;
 }
-function save(index){
+
+function save(index) {
     let id = document.getElementById('id').value;
     let name = document.getElementById('name').value;
     let price = document.getElementById('price').value;
     let quantity = document.getElementById('quantity').value;
     let image = document.getElementById('image').value;
     let newProduct = new Product(id, name, price, quantity, image);
-    myStore.save(index,newProduct);
+    myStore.save(index, newProduct);
     showHome();
 }
-function showFind(){
+
+function showSearch() {
     document.getElementById('main').innerHTML = ` <br>
-    <input type="search" placeholder="Nhập tên sản phẩm" id="name">   
-    <button onclick="find()">Tìm</button> ` ;
+    <input style="
+  background-position: 10px 12px;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px " type="text" placeholder="Search for names.." id="nameSearch">   
+    <button style="background-position: 10px 12px;font-size: 16px;padding: 12px 20px 12px 40px;border: 1px solid #ddd;margin-bottom: 12px " onclick="search()">Search</button> `;
 }
-function find(){
-    let name = document.getElementById('name').value;
-    listProduct.includes("name")
+
+function search() {
+    let nameSearch = document.getElementById("nameSearch").value; // lấy dữ liêu từ ô input
+    let listSearch = myStore.searchByName(nameSearch);
+    if (listSearch.length > 0) {
+        let str = ``
+        document.getElementById('main').innerHTML = `
+        <h3>Kết Quả Tìn Kiếm</h3><br>
+   <table border="1" style="width:100%; height: fit-content;border: 1px solid black; border-collapse: collapse">
+<tr style="background-color: black;color: white;font-size: large;padding-bottom: 20px; height: 50px">
+<th>STT</th>
+<th>Tên sản phẩm</th>
+<th>Giá (VNĐ)</th>
+<th>Số lượng (cái)</th>
+<th>Hình ảnh</th>
+<th colspan="2">Thao tác</th>
+</tr>
+<tbody id="listSearch"></tbody>
+</table>
+    `
+        for (let i = 0; i < listSearch.length; i++) {
+            str += `
+            <tr style="font-size: large">
+<td style="text-align: center">${listSearch[i].id}</td>
+<td style="padding: 15px;text-align: left">${listSearch[i].name}</td>
+<td style="padding: 15px;text-align: right">${listSearch[i].price}</td>
+<td style="text-align: center">${listSearch[i].quantity}</td>
+<td style="text-align: center"><img class="my-img" src="${listSearch[i].image}" alt=""></td>
+<td style="text-align: center"><button style="background: gray;color: white" onclick="showRemove(${i})">Delete</button></td>
+<td style="text-align: center"><button style="color: white;background: gray" onclick="showEdit(${i})">Edit</button></td>
+           </tr>`
+        }
+        document.getElementById("listSearch").innerHTML = str;
+    } else {
+        alert("Không tìm thấy " + nameSearch);
+    }
+
 }
+
+
+
+
+

@@ -27,4 +27,7 @@ class Store {
     save(index,newProduct){
         this.listProduct[index] = newProduct;
     }
+    searchByName(name) {
+        return this.listProduct.filter(value => value.name.toUpperCase().includes(name.toUpperCase()))
+    }
 }
