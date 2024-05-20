@@ -4,7 +4,7 @@ class Store {
 
     constructor(name) {
         this.name = name;
-        this.listProduct = JSON.parse(localStorage.getItem('data'));
+        this.listProduct = localStorage.getItem('data') == null ? 0 : localStorage.getItem('data')
         let sp1 = new Product(1, 'Bánh táo', 80000, 50, "banhtao.jpg");
         let sp2 = new Product(2, 'Bánh donut', 30000, 110, "donut.jpg");
         let sp3 = new Product(3, 'Bánh macaron', 15000, 90, "macaron.jpg");
