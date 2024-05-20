@@ -4,7 +4,7 @@ class Store {
 
     constructor(name) {
         this.name = name;
-        this.listProduct = [];
+        this.listProduct = JSON.parse(localStorage.getItem('data'));
         let sp1 = new Product(1, 'Bánh táo', 80000, 50, "banhtao.jpg");
         let sp2 = new Product(2, 'Bánh donut', 30000, 110, "donut.jpg");
         let sp3 = new Product(3, 'Bánh macaron', 15000, 90, "macaron.jpg");
@@ -24,9 +24,11 @@ class Store {
     remove(index) {
         this.listProduct.splice(index, 1);
     }
-    save(index,newProduct){
+
+    save(index, newProduct) {
         this.listProduct[index] = newProduct;
     }
+
     searchByName(name) {
         return this.listProduct.filter(value => value.name.toUpperCase().includes(name.toUpperCase()))
     }

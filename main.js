@@ -15,7 +15,7 @@ function showHome() {
 <tbody id="listProduct"></tbody>
 </table>
 `
-    let list = myStore.listProduct;
+    let list = JSON.parse(localStorage.getItem('data'));
     let html = ``;
     for (let i = 0; i < list.length; i++) {
         html += ` 
@@ -51,6 +51,7 @@ function add() {
     let image = document.getElementById('image').value;
     let newProduct = new Product(id, name, price, quantity, image);
     myStore.add(newProduct);
+    saveLocalStorage();
     showHome();
 }
 
@@ -58,6 +59,7 @@ function showRemove(index) {
     let isConfirm = confirm('Bạn chắc chắn xóa chứ?');
     if (isConfirm) {
         myStore.remove(index);
+        saveLocalStorage();
         showHome();
     }
 }
@@ -82,6 +84,7 @@ function save(index) {
     let image = document.getElementById('image').value;
     let newProduct = new Product(id, name, price, quantity, image);
     myStore.save(index, newProduct);
+    saveLocalStorage()
     showHome();
 }
 
@@ -132,7 +135,24 @@ function search() {
         alert("Không tìm thấy " + nameSearch);
     }
 
+    //Local Storage
+    function saveLocalStorage() {
+        list = myStore.listProduct;
+        localStorage.setItem('data', JSON.stringify(list));
+    }
+
+    function restoreLocalStorage() {
+        if (localStorage.getItem('data')) {
+            list = JSON.parse(localStorage.getItem('data'));
+            showHome();
+        }
+    }
 }
+
+window.onload = function () {
+    restoreLocalStorage()
+}
+showHome();
 
 
 
