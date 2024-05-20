@@ -15,7 +15,7 @@ function showHome() {
 <tbody id="listProduct"></tbody>
 </table>
 `
-    let list = JSON.parse(localStorage.getItem('data'));
+    let list = localStorage.getItem('data') == null ? [] : JSON.parse(localStorage.getItem('data'));
     let html = ``;
     for (let i = 0; i < list.length; i++) {
         html += ` 
@@ -65,7 +65,7 @@ function showRemove(index) {
 }
 
 function showEdit(index) {
-    let list = myStore.listProduct;
+    let list = localStorage.getItem('data') == null ? [] : JSON.parse(localStorage.getItem('data'));
     let oldProduct = list[index];
     document.getElementById('main').innerHTML = `
     <input value="${oldProduct.id}" type="text" placeholder="STT" id="id">
@@ -135,17 +135,18 @@ function search() {
         alert("Không tìm thấy " + nameSearch);
     }
 
-    //Local Storage
-    function saveLocalStorage() {
-        list = myStore.listProduct;
-        localStorage.setItem('data', JSON.stringify(list));
-    }
 
-    function restoreLocalStorage() {
-        if (localStorage.getItem('data')) {
-            list = JSON.parse(localStorage.getItem('data'));
-            showHome();
-        }
+}
+//Local Storage
+function saveLocalStorage() {
+    list = myStore.listProduct;
+    localStorage.setItem('data', JSON.stringify(list));
+}
+
+function restoreLocalStorage() {
+    if (localStorage.getItem('data')) {
+        list = JSON.parse(localStorage.getItem('data'));
+        showHome();
     }
 }
 
