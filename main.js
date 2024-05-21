@@ -22,7 +22,7 @@ function showHome() {
     <tr style="font-size: large">
 <td style="text-align: center">${list[i].id}</td>
 <td style="padding: 15px;text-align: left">${list[i].name}</td>
-<td style="padding: 15px;text-align: right">${convert(list[i].price)}</td>
+<td style="padding: 15px;text-align: right">${convert(list[i].price)}</td> // định dạng phần nghìn
 <td style="text-align: center">${list[i].quantity}</td>
 <td style="text-align: center"><img class="my-img" src="${list[i].image}" alt=""></td>
 <td style="text-align: center"><button style="background: gray;color: white" onclick="showRemove(${i})">Delete</button></td>
