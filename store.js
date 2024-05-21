@@ -34,6 +34,9 @@ class Store {
     }
 
     searchByName(name) {
-        return this.listProduct.filter(value => value.name.toUpperCase().includes(name.toUpperCase()))
+        if (name){
+            return this.listProduct.filter(value => value.name.toUpperCase().includes(name.toUpperCase()))
+        }
+        return this.listProduct;
     }
 }

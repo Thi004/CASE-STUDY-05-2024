@@ -4,8 +4,8 @@ showHome();
 function showHome() {
     document.getElementById('main').innerHTML = `
 <table border="1" style="width:100%; height: fit-content;border: 1px solid black; border-collapse: collapse;">
-<tr style="background-color: black;color: white;font-size: large;padding-bottom: 20px; height: 50px">
-<th>STT</th>
+<tr style="background-color: black;color: white;font-size: large;padding-bottom: 10px; height: 50px">
+<th>Mã số</th>
 <th>Tên sản phẩm</th>
 <th>Giá (VNĐ)</th>
 <th>Số lượng (cái)</th>
@@ -22,7 +22,7 @@ function showHome() {
     <tr style="font-size: large">
 <td style="text-align: center">${list[i].id}</td>
 <td style="padding: 15px;text-align: left">${list[i].name}</td>
-<td style="padding: 15px;text-align: right">${list[i].price}</td>
+<td style="padding: 15px;text-align: right">${convert(list[i].price)}</td>
 <td style="text-align: center">${list[i].quantity}</td>
 <td style="text-align: center"><img class="my-img" src="${list[i].image}" alt=""></td>
 <td style="text-align: center"><button style="background: gray;color: white" onclick="showRemove(${i})">Delete</button></td>
@@ -31,6 +31,7 @@ function showHome() {
     `
     }
     document.getElementById("listProduct").innerHTML = html;
+
 }
 
 function showAdd() {
@@ -74,6 +75,7 @@ function showEdit(index) {
     <input value="${oldProduct.quantity}" type="text" placeholder="Số lượng" id="quantity">
     <input value="${oldProduct.image}" type="text" placeholder="Hình sản phẩm" id="image">
     <button onclick="save(${index})">Lưu thay đổi</button> `;
+
 }
 
 function save(index) {
@@ -95,8 +97,8 @@ function showSearch() {
   font-size: 16px;
   padding: 12px 20px 12px 40px;
   border: 1px solid #ddd;
-  margin-bottom: 12px " type="text" placeholder="Search for names.." id="nameSearch">   
-    <button style="background-position: 10px 12px;font-size: 16px;padding: 12px 20px 12px 40px;border: 1px solid #ddd;margin-bottom: 12px " onclick="search()">Search</button> `;
+  margin-bottom: 12px " type="text" placeholder="Search for names.." id="nameSearch" onchange="search()">   
+     `;
 }
 
 function search() {
@@ -105,10 +107,10 @@ function search() {
     if (listSearch.length > 0) {
         let str = ``
         document.getElementById('main').innerHTML = `
-        <h3>Kết Quả Tìn Kiếm</h3><br>
+        <h3 style="color: green">Kết Quả Tìm Kiếm</h3><br>
    <table border="1" style="width:100%; height: fit-content;border: 1px solid black; border-collapse: collapse">
 <tr style="background-color: black;color: white;font-size: large;padding-bottom: 20px; height: 50px">
-<th>STT</th>
+<th>Mã số</th>
 <th>Tên sản phẩm</th>
 <th>Giá (VNĐ)</th>
 <th>Số lượng (cái)</th>
@@ -135,8 +137,8 @@ function search() {
         alert("Không tìm thấy " + nameSearch);
     }
 
-
 }
+
 //Local Storage
 function saveLocalStorage() {
     list = myStore.listProduct;
@@ -155,6 +157,17 @@ window.onload = function () {
 }
 showHome();
 
+// định dạng phần nghìn
+// function convert(x) {
+//    x = new Intl.NumberFormat("de-DE").format(x);
+//    return x;
+// }
+// gọi hàm tại cột trong listProduct
+//<td style="padding: 15px;text-align: right">${convert(list[i].price)}</td>
+function convert (price) {
+    price = new Intl.NumberFormat("de-DE").format(price);
+        return price;
+}
 
 
 
