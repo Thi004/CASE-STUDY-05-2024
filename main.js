@@ -4,14 +4,15 @@ showHome();
 function showHome() {
     document.getElementById('main').innerHTML = `
 <table border="1" style="width:100%; height: fit-content;border: 1px solid black; border-collapse: collapse;">
-<tr style="background-color: black;color: white;font-size: large;padding-bottom: 10px; height: 50px">
-<th>Mã số</th>
-<th>Tên sản phẩm</th>
-<th>Giá (VNĐ)</th>
-<th>Số lượng (cái)</th>
-<th>Hình ảnh</th>
-<th colspan="2">Thao tác</th>
-</tr>
+      <tr style="background-color: black;color: white;font-size: large;padding-bottom: 10px; height: 50px">
+          <th>STT</th>
+          <th>Mã số</th>
+          <th>Tên sản phẩm</th>
+          <th>Giá (VNĐ)</th>
+          <th>Số lượng (cái)</th>
+          <th>Hình ảnh</th>
+          <th colspan="2">Thao tác</th>
+      </tr>
 <tbody id="listProduct"></tbody>
 </table>
 `
@@ -20,13 +21,14 @@ function showHome() {
     for (let i = 0; i < list.length; i++) {
         html += ` 
     <tr style="font-size: large">
-<td style="text-align: center">${list[i].id}</td>
-<td style="padding: 15px;text-align: left">${list[i].name}</td>
-<td style="padding: 15px;text-align: right">${convert(list[i].price)}</td>
-<td style="text-align: center">${list[i].quantity}</td>
-<td style="text-align: center"><img class="my-img" src="${list[i].image}" alt=""></td>
-<td style="text-align: center"><button style="background: gray;color: white" onclick="showRemove(${i})">Delete</button></td>
-<td style="text-align: center"><button style="color: white;background: gray" onclick="showEdit(${i})">Edit</button></td>
+        <td style="text-align: center">${i+1}</td>
+        <td style="text-align: center">${list[i].id}</td>
+        <td style="padding: 15px;text-align: left">${list[i].name}</td>
+        <td style="padding: 15px;text-align: right">${convert(list[i].price)}</td>
+        <td style="text-align: center">${list[i].quantity}</td>
+        <td style="text-align: center"><img class="my-img" src="${list[i].image}" alt=""></td>
+        <td style="text-align: center"><button style="background: gray;color: white" onclick="showRemove(${i})">Delete</button></td>
+        <td style="text-align: center"><button style="color: white;background: gray" onclick="showEdit(${i})">Edit</button></td>
     </tr>
     `
     }
@@ -109,34 +111,35 @@ function search() {
         document.getElementById('main').innerHTML = `
         <h3 style="color: green">Kết Quả Tìm Kiếm</h3><br>
    <table border="1" style="width:100%; height: fit-content;border: 1px solid black; border-collapse: collapse">
-<tr style="background-color: black;color: white;font-size: large;padding-bottom: 20px; height: 50px">
-<th>Mã số</th>
-<th>Tên sản phẩm</th>
-<th>Giá (VNĐ)</th>
-<th>Số lượng (cái)</th>
-<th>Hình ảnh</th>
-<th colspan="2">Thao tác</th>
-</tr>
-<tbody id="listSearch"></tbody>
-</table>
+     <tr style="background-color: black;color: white;font-size: large;padding-bottom: 20px; height: 50px">
+        <th>STT</th>
+        <th>Mã số</th>
+        <th>Tên sản phẩm</th>
+        <th>Giá (VNĐ)</th>
+        <th>Số lượng (cái)</th>
+        <th>Hình ảnh</th>
+        <th colspan="2">Thao tác</th>
+    </tr>
+        <tbody id="listSearch"></tbody>
+   </table>
     `
         for (let i = 0; i < listSearch.length; i++) {
             str += `
             <tr style="font-size: large">
-<td style="text-align: center">${listSearch[i].id}</td>
-<td style="padding: 15px;text-align: left">${listSearch[i].name}</td>
-<td style="padding: 15px;text-align: right">${listSearch[i].price}</td>
-<td style="text-align: center">${listSearch[i].quantity}</td>
-<td style="text-align: center"><img class="my-img" src="${listSearch[i].image}" alt=""></td>
-<td style="text-align: center"><button style="background: gray;color: white" onclick="showRemove(${i})">Delete</button></td>
-<td style="text-align: center"><button style="color: white;background: gray" onclick="showEdit(${i})">Edit</button></td>
+                <td style="text-align: center">${i+1}</td>
+                <td style="text-align: center">${listSearch[i].id}</td>
+                <td style="padding: 15px;text-align: left">${listSearch[i].name}</td>
+                <td style="padding: 15px;text-align: right">${listSearch[i].price}</td>
+                <td style="text-align: center">${listSearch[i].quantity}</td>
+                <td style="text-align: center"><img class="my-img" src="${listSearch[i].image}" alt=""></td>
+                <td style="text-align: center"><button style="background: gray;color: white" onclick="showRemove(${i})">Delete</button></td>
+                <td style="text-align: center"><button style="color: white;background: gray" onclick="showEdit(${i})">Edit</button></td>
            </tr>`
         }
         document.getElementById("listSearch").innerHTML = str;
     } else {
         alert("Không tìm thấy " + nameSearch);
     }
-
 }
 
 //Local Storage
@@ -168,6 +171,7 @@ function convert (price) {
     price = new Intl.NumberFormat("de-DE").format(price);
         return price;
 }
+
 
 
 
